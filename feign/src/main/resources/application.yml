@@ -1,0 +1,14 @@
+server:
+  port: 8086
+
+ribbon:
+  eureka:
+   enabled: false
+
+feignTest:
+  ribbon:
+    listOfServers: localhost:8082
+
+
+
+
