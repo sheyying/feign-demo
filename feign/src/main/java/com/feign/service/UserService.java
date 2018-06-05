@@ -1,8 +1,8 @@
 package com.feign.service;
 
-import com.feign.client.FeignTestClient;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.common.entity.User;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -12,6 +12,9 @@ public interface UserService {
 
     String getName(String name);
 
+    User getUser(long id);
+
     Map<String, Object> getMap(Map<String, Object> map);
 
+    User getAdmin(List<User> userList);
 }

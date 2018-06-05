@@ -1,9 +1,11 @@
 package com.feign.controller;
 
+import com.common.entity.User;
 import com.feign.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -30,9 +32,23 @@ public class UserController {
     }
 
     @ResponseBody
+    @RequestMapping(value = "/getUser", method={RequestMethod.POST})
+    public User getUser(long id){
+        User result = userService.getUser(id);
+        return result;
+    }
+
+    @ResponseBody
     @RequestMapping(value = "/getMap", method={RequestMethod.POST})
     public Map<String, Object> getMap(@RequestBody Map<String, Object> map){
         Map<String, Object> result = userService.getMap(map);
+        return result;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/getAdmin", method={RequestMethod.POST})
+    public User getAdmin(@RequestBody List<User> userList){
+        User result = userService.getAdmin(userList);
         return result;
     }
 }

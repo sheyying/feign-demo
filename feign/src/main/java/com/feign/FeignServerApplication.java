@@ -11,7 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
  * Created by sheying on 2018/05/31.
  */
 @SpringBootApplication
-@EnableFeignClients(basePackages = {"com.feign.client"})
+@EnableFeignClients
 public class FeignServerApplication {
 
     @Bean
