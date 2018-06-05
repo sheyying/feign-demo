@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * Created by sheying on 2018/05/31.
  */
-@FeignClient(name = "feignTest", path = "/api/user")
+@FeignClient(name = "feignTest", path = "/api/user", fallback = HystrixClientFallback.class)
 public interface FeignTestClient {
 
     @RequestMapping(method = RequestMethod.GET, value = "/getName")

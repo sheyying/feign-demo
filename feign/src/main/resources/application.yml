@@ -9,6 +9,10 @@ feignTest:
   ribbon:
     listOfServers: localhost:8082
 
+feign:
+  hystrix:
+    enabled: true
+
 
 
 
