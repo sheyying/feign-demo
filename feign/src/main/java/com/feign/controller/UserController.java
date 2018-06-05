@@ -1,6 +1,6 @@
 package com.feign.controller;
 
-import com.feign.client.FeignTestClient;
+import com.feign.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +14,7 @@ import java.util.Map;
 public class UserController {
 
     @Autowired
-    private FeignTestClient feignTestClient;
+    private UserService userService;
 
     @ResponseBody
     @RequestMapping(value = "/test", method={RequestMethod.GET})
@@ -25,14 +25,14 @@ public class UserController {
     @ResponseBody
     @RequestMapping(value = "/getName", method={RequestMethod.GET})
     public String getName(@RequestParam("name") String name) {
-        String result = feignTestClient.getName(name);
+        String result = userService.getName(name);
         return result;
     }
 
     @ResponseBody
     @RequestMapping(value = "/getMap", method={RequestMethod.POST})
     public Map<String, Object> getMap(@RequestBody Map<String, Object> map){
-        Map<String, Object> result = feignTestClient.getMap(map);
+        Map<String, Object> result = userService.getMap(map);
         return result;
     }
 }
