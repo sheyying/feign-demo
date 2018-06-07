@@ -10,8 +10,14 @@ feignTest:
   ribbon:
     listOfServers: localhost:8082
 
+#spring.aop.auto: true
+#
+#spring:
+#  aop:
+#    proxy-target-class: false #jdk
+
 # 开启日志 格式为logging.level.+Feign客户端路径
-logging.level.org.sang.HelloService: debug
+#logging.level.org.sang.HelloService: debug
 
 # 是否开启熔断器
 # feign.hystrix.enabled: true

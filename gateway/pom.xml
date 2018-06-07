@@ -11,5 +11,14 @@
 
     <artifactId>gateway</artifactId>
 
+    <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-eureka</artifactId>
+            <version>1.4.3.RELEASE</version>
+        </dependency>
+
+    </dependencies>
 
 </project>

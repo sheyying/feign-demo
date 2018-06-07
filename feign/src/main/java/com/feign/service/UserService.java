@@ -1,6 +1,7 @@
 package com.feign.service;
 
 import com.common.entity.User;
+import com.feign.response.UserResponse;
 
 import java.util.List;
 import java.util.Map;
@@ -10,11 +11,11 @@ import java.util.Map;
  */
 public interface UserService {
 
-    String getName(String name);
+    UserResponse<String, Void> getName(String name);
 
-    User getUser(long id);
+    UserResponse<User, Void> getUser(long id);
 
-    Map<String, Object> getMap(Map<String, Object> map);
+    UserResponse<User, Void> getAdmin(List<User> userList);
 
-    User getAdmin(List<User> userList);
+    UserResponse<User, Void> getUserWithHeader(String encoding, String accept);
 }

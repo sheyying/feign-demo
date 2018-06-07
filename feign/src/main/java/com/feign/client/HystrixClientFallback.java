@@ -1,8 +1,10 @@
 package com.feign.client;
 
 import com.common.entity.User;
+import com.feign.response.UserResponse;
 import org.springframework.stereotype.Component;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,23 +15,38 @@ import java.util.Map;
 public class HystrixClientFallback implements FeignTestClient{
 
     @Override
-    public String getName(String name) {
-        return "出错啦~~~";
+    public UserResponse<String, Void> getName(String name) {
+        UserResponse response = new UserResponse();
+        response.setReturnCode("110");
+        response.setReturnMsg("faild");
+        response.setData("出错啦~~~");
+        return response;
     }
 
     @Override
-    public Map<String, Object> getMap(Map<String, Object> map) {
-        map.put("message", "出错啦!!!");
-        return map;
+    public UserResponse<User, Void> getUser(long id) {
+        UserResponse response = new UserResponse();
+        response.setReturnCode("110");
+        response.setReturnMsg("faild");
+        response.setData(null);
+        return response;
     }
 
     @Override
-    public User getUser(long id) {
-        return null;
+    public UserResponse<User, Void> getAdmin(List<User> userList) {
+        UserResponse response = new UserResponse();
+        response.setReturnCode("110");
+        response.setReturnMsg("faild");
+        response.setData(null);
+        return response;
     }
 
     @Override
-    public User getAdmin(List<User> userList) {
-        return null;
+    public UserResponse<User, Void> getUserWithHeader(String encoding, String accept) {
+        UserResponse response = new UserResponse();
+        response.setReturnCode("110");
+        response.setReturnMsg("faild");
+        response.setData(null);
+        return response;
     }
 }

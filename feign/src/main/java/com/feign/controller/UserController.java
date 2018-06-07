@@ -1,6 +1,7 @@
 package com.feign.controller;
 
 import com.common.entity.User;
+import com.feign.response.UserResponse;
 import com.feign.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,29 +27,39 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping(value = "/getName", method={RequestMethod.GET})
-    public String getName(@RequestParam("name") String name) {
-        String result = userService.getName(name);
+    public UserResponse<String, Void> getName(@RequestParam("name") String name) {
+        UserResponse<String, Void> result = userService.getName(name);
         return result;
     }
 
     @ResponseBody
     @RequestMapping(value = "/getUser", method={RequestMethod.POST})
-    public User getUser(long id){
-        User result = userService.getUser(id);
-        return result;
-    }
-
-    @ResponseBody
-    @RequestMapping(value = "/getMap", method={RequestMethod.POST})
-    public Map<String, Object> getMap(@RequestBody Map<String, Object> map){
-        Map<String, Object> result = userService.getMap(map);
+    public UserResponse<User, Void> getUser(long id){
+        UserResponse<User, Void> result = userService.getUser(id);
         return result;
     }
 
     @ResponseBody
     @RequestMapping(value = "/getAdmin", method={RequestMethod.POST})
-    public User getAdmin(@RequestBody List<User> userList){
-        User result = userService.getAdmin(userList);
+    public UserResponse<User, Void> getAdmin(@RequestBody List<User> userList){
+        UserResponse<User, Void> result = userService.getAdmin(userList);
         return result;
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/getUserWithHeader", method={RequestMethod.GET})
+    public UserResponse<User, Void> getUserWithHeader(@RequestHeader("Accept-Encoding") String encoding,
+                                                      @RequestHeader("Accept") String accept){
+        UserResponse<User, Void> result = userService.getUserWithHeader(encoding, accept);
+        return result;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/testAsync", method={RequestMethod.POST})
+    public UserResponse<String, Void> testAsync(long id){
+        userService.getAdmin(null);
+        userService.getUser(id);
+        return userService.getName("testAsync");
+    }
+
 }
