@@ -5,29 +5,32 @@ package com.common.response;
  * 返回值类型
  */
 public interface FeignServiceResponse<T, ErrT> {
+    String monitorTrackId();
+    String globalTicket();
+    String logBizData();
     /**
      * 返回状态码
      * @return
      */
-    String getReturnCode();
+    String returnCode();
     /**
      * 返回信息
      * @return
      */
-    String getReturnMsg();
+    String returnMsg();
     /**
      * 返回对象
      * @return
      */
-    T getData();
+    T responseVo();
     /**
      * 返回错误信息对象
      * @return
      */
-    ErrT getErrT();
+    ErrT errT();
     /**
      * 响应状态
      * @return
      */
-    Boolean getResponseStatus();
+    Boolean responseStatus();
 }

@@ -52,7 +52,7 @@ public class WebRequestAroundAdvice implements ApplicationContextAware{
             //得到该类下面的RequestMapping注解
             EnableReponseValidater validater = method.getAnnotation(EnableReponseValidater.class);
             if (null != validater) {
-                System.out.println(returnType.getTypeName() + "返回成功状态码：" + validater.successCode());
+                System.out.println(returnType.getTypeName() + "返回成功状态码：" + validater);
                 if (result instanceof FeignServiceResponse){
                     System.out.println("+++++++++++ returnType instanceof FeignServiceResponse +++++++++++++");
 

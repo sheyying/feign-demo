@@ -1,13 +1,12 @@
 package com.feign;
 
-import org.springframework.cloud.netflix.feign.EnableFeignClients;
+import com.common.annotation.EnableO2OFeignConfig;
 import org.springframework.context.annotation.Configuration;
 
 /**
  * Created by sheying on 2018/06/06.
  */
-// @EnableFeignClients 开启FeignClients注解
-@EnableFeignClients
+@EnableO2OFeignConfig
 @Configuration
 public class FeignConfig {
 }

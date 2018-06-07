@@ -23,54 +23,54 @@ public class UserServiceImpl implements UserService{
     private FeignTestClient feignTestClient;
 
     @Override
-    @Async
+//    @Async
     public UserResponse<String, Void> getName(String name){
         System.out.println(" =======> 开始 getName()");
         long start = System.currentTimeMillis();
 
         UserResponse<String, Void> response = feignTestClient.getName(name);
 
-        try {
+        /*try {
             Thread.sleep(random.nextInt(10000));
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
         long end = System.currentTimeMillis();
         System.out.println(" =======> 完成 getName()，耗时：" + (end - start) + "毫秒");
         return response;
     }
 
     @Override
-    @Async
+//    @Async
     public UserResponse<User, Void> getUser(long id){
         System.out.println(" =======> 开始 getUser()");
         long start = System.currentTimeMillis();
 
         UserResponse<User, Void> response = feignTestClient.getUser(id);
 
-        try {
+       /* try {
             Thread.sleep(random.nextInt(10000));
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
         long end = System.currentTimeMillis();
         System.out.println(" =======> 完成 getUser()，耗时：" + (end - start) + "毫秒");
         return response;
     }
 
     @Override
-    @Async
+//    @Async
     public UserResponse<User, Void> getAdmin(List<User> userList){
         System.out.println(" =======> 开始 getAdmin()");
         long start = System.currentTimeMillis();
 
         UserResponse<User, Void> response = feignTestClient.getAdmin(userList);
 
-        try {
+       /* try {
             Thread.sleep(random.nextInt(10000));
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
         long end = System.currentTimeMillis();
         System.out.println(" =======> 完成 getAdmin()，耗时：" + (end - start) + "毫秒");
         return response;

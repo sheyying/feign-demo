@@ -22,7 +22,7 @@ public class UserController {
         UserResponse response = new UserResponse();
         response.setReturnCode("000000");
         response.setReturnMsg("success");
-        response.setData(name.toUpperCase());
+        response.setResponseVo(name.toUpperCase());
 
         return response;
     }
@@ -38,12 +38,12 @@ public class UserController {
 
         response.setReturnCode("000000");
         response.setReturnMsg("success");
-        response.setData(user);
+        response.setResponseVo(user);
 
         if (id > 10000){
             response.setReturnCode("000002");
             response.setReturnMsg("id too big");
-            response.setData(null);
+            response.setResponseVo(null);
         }
 
         return response;
@@ -64,7 +64,7 @@ public class UserController {
             if (user.getName().equals("admin")){
                 response.setReturnCode("000000");
                 response.setReturnMsg("success");
-                response.setData(user);
+                response.setResponseVo(user);
                 return response;
             }
         }
@@ -96,7 +96,7 @@ public class UserController {
 
         response.setReturnCode("000000");
         response.setReturnMsg("success");
-        response.setData(user);
+        response.setResponseVo(user);
 
         return response;
     }

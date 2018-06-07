@@ -11,10 +11,10 @@ import javax.annotation.Resource;
  */
 public class AnnotationTest {
 
-    @EnableReponseValidater
+//    @EnableReponseValidater(clazz = UserResponse)
     public FeignServiceResponse doSomething() { return null; }
 
-    @EnableReponseValidater
+//    @EnableReponseValidater
     public FeignServiceResponse doSomething(User user) { return null; }
 
     @Resource

@@ -17,7 +17,7 @@ public class ReponseValidaterUtil {
             //得到该类下面的RequestMapping注解
             EnableReponseValidater validater = method.getAnnotation(EnableReponseValidater.class);
             if (null != validater) {
-                System.out.println(returnType + "返回成功状态码：" + validater.successCode());
+                System.out.println(returnType + "返回成功状态码：" + validater);
             }
         }
     }

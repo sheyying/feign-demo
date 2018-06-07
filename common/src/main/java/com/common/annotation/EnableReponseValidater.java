@@ -10,10 +10,6 @@ import java.lang.annotation.*;
 @Documented
 public @interface EnableReponseValidater {
 
-    /**
-     * 返回成功状态码，默认000000
-     * @return
-     */
-    String successCode() default "000000";
+
 
 }

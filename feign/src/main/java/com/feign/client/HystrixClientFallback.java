@@ -19,7 +19,7 @@ public class HystrixClientFallback implements FeignTestClient{
         UserResponse response = new UserResponse();
         response.setReturnCode("110");
         response.setReturnMsg("faild");
-        response.setData("出错啦~~~");
+        response.setResponseVo("出错啦~~~");
         return response;
     }
 
@@ -28,7 +28,7 @@ public class HystrixClientFallback implements FeignTestClient{
         UserResponse response = new UserResponse();
         response.setReturnCode("110");
         response.setReturnMsg("faild");
-        response.setData(null);
+        response.setResponseVo(null);
         return response;
     }
 
@@ -37,7 +37,7 @@ public class HystrixClientFallback implements FeignTestClient{
         UserResponse response = new UserResponse();
         response.setReturnCode("110");
         response.setReturnMsg("faild");
-        response.setData(null);
+        response.setResponseVo(null);
         return response;
     }
 
@@ -46,7 +46,7 @@ public class HystrixClientFallback implements FeignTestClient{
         UserResponse response = new UserResponse();
         response.setReturnCode("110");
         response.setReturnMsg("faild");
-        response.setData(null);
+        response.setResponseVo(null);
         return response;
     }
 }
