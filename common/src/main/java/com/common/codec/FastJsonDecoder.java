@@ -1,4 +1,4 @@
-package com.common.coder;
+package com.common.codec;
 
 import feign.FeignException;
 import feign.Response;

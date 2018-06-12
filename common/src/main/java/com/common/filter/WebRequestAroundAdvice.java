@@ -1,7 +1,7 @@
 package com.common.filter;
 
-import com.common.annotation.EnableReponseValidater;
-import com.common.response.FeignServiceResponse;
+import com.common.annotation.ResponseValidate;
+import com.common.response.FeignResponse;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -50,15 +50,15 @@ public class WebRequestAroundAdvice implements ApplicationContextAware{
         for (Method method : methods) {
             Type returnType = method.getGenericReturnType();
             //得到该类下面的RequestMapping注解
-            EnableReponseValidater validater = method.getAnnotation(EnableReponseValidater.class);
+            ResponseValidate validater = method.getAnnotation(ResponseValidate.class);
             if (null != validater) {
                 System.out.println(returnType.getTypeName() + "返回成功状态码：" + validater);
-                if (result instanceof FeignServiceResponse){
-                    System.out.println("+++++++++++ returnType instanceof FeignServiceResponse +++++++++++++");
+                if (result instanceof FeignResponse){
+                    System.out.println("+++++++++++ returnType instanceof FeignResponse +++++++++++++");
 
-                    Collection<FeignServiceResponse> jobList = new LinkedList<FeignServiceResponse>(
-                            this.applicationContext.getBeansOfType(FeignServiceResponse.class).values());
-                    for (FeignServiceResponse response : jobList){
+                    Collection<FeignResponse> jobList = new LinkedList<FeignResponse>(
+                            this.applicationContext.getBeansOfType(FeignResponse.class).values());
+                    for (FeignResponse response : jobList){
                         System.out.println(response.getClass().getName());
                         if (response.getClass().getName().equals(returnType.getTypeName())){
                             System.out.println("匹配成功!! " + response.getClass().getName());

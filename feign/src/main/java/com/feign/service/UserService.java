@@ -5,6 +5,7 @@ import com.feign.response.UserResponse;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Future;
 
 /**
  * Created by sheying on 2018/06/05.
@@ -18,4 +19,7 @@ public interface UserService {
     UserResponse<User, Void> getAdmin(List<User> userList);
 
     UserResponse<User, Void> getUserWithHeader(String encoding, String accept);
+
+    String testAsync(List<User> userList);
+
 }

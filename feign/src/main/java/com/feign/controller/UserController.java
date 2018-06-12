@@ -56,10 +56,8 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping(value = "/testAsync", method={RequestMethod.POST})
-    public UserResponse<String, Void> testAsync(long id){
-        userService.getAdmin(null);
-        userService.getUser(id);
-        return userService.getName("testAsync");
+    public String testAsync(@RequestBody List<User> userList){
+        return userService.testAsync(userList);
     }
 
 }

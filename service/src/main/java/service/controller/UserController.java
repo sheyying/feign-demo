@@ -1,6 +1,8 @@
 package service.controller;
 
 import com.common.entity.User;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.AsyncResult;
 import service.response.UserResponse;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,6 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 /**
  * Created by sheying on 2018/06/05.
@@ -15,6 +19,8 @@ import java.util.Random;
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
+
+    Random random = new Random();
 
     @ResponseBody
     @RequestMapping(value="/getName",method={RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT})
@@ -100,4 +106,27 @@ public class UserController {
 
         return response;
     }
+
+    @RequestMapping(value = "/insertUser", method={RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT})
+    public void insertUser(@RequestBody User user) throws InterruptedException{
+        System.out.println(" =======> 开始 insertUser() user = " + user);
+        long start = System.currentTimeMillis();
+
+        Thread.sleep(random.nextInt(5000));
+        long end = System.currentTimeMillis();
+        System.out.println(" =======> 完成 insertUser()，耗时：" + (end - start) + "毫秒 " + user);
+    }
+
+    @RequestMapping(value = "/updateUser", method={RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT})
+    public String updateUser(@RequestParam("id") Long id) throws InterruptedException{
+        System.out.println(" =======> 开始 updateUser() id = " + id);
+        long start = System.currentTimeMillis();
+
+        Thread.sleep(random.nextInt(5000));
+        long end = System.currentTimeMillis();
+        System.out.println(" =======> 完成 updateUser()，耗时：" + (end - start) + "毫秒");
+
+        return "updateUser 成功";
+    }
+
 }

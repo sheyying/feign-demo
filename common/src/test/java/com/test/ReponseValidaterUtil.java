@@ -1,6 +1,6 @@
 package com.test;
 
-import com.common.annotation.EnableReponseValidater;
+import com.common.annotation.ResponseValidate;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
@@ -15,7 +15,7 @@ public class ReponseValidaterUtil {
         for (Method method : methods) {
             Type returnType = method.getGenericReturnType();
             //得到该类下面的RequestMapping注解
-            EnableReponseValidater validater = method.getAnnotation(EnableReponseValidater.class);
+            ResponseValidate validater = method.getAnnotation(ResponseValidate.class);
             if (null != validater) {
                 System.out.println(returnType + "返回成功状态码：" + validater);
             }

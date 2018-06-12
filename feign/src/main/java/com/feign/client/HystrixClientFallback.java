@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Future;
 
 /**
  * Created by sheying on 2018/06/05.
@@ -48,5 +49,16 @@ public class HystrixClientFallback implements FeignTestClient{
         response.setReturnMsg("faild");
         response.setResponseVo(null);
         return response;
+    }
+
+    @Override
+    public void insertUser(User user) {
+        System.out.println(" -------- insertUser faild !!! " + user);
+    }
+
+    @Override
+    public String updateUser(long id) {
+        System.out.println(" -------- updateUser faild !!! " + id);
+        return " -------- updateUser faild !!! " + id;
     }
 }

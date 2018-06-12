@@ -1,6 +1,6 @@
 package service.response;
 
-import com.common.response.FeignServiceResponse;
+import com.common.response.FeignResponse;
 import lombok.Data;
 
 import java.util.UUID;
@@ -9,7 +9,7 @@ import java.util.UUID;
  * Created by sheying on 2018/06/06.
  */
 @Data
-public class UserResponse<T, ErrT> implements FeignServiceResponse {
+public class UserResponse<T, ErrT> implements FeignResponse {
 
     private static final String RETURN_SUCCESS = "000000";
     private static final long serialVersionUID = 889695893318362669L;
@@ -59,7 +59,7 @@ public class UserResponse<T, ErrT> implements FeignServiceResponse {
     }
 
     @Override
-    public Boolean responseStatus() {
+    public Boolean responseSuccess() {
         return this.returnCode.equals(RETURN_SUCCESS);
     }
 
