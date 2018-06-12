@@ -1,6 +1,7 @@
 package com.feign.client;
 
 import com.common.annotation.ResponseValidate;
+import com.common.config.MyFeignDefaultConfig;
 import com.common.entity.User;
 import com.feign.response.UserResponse;
 import org.springframework.cloud.netflix.feign.FeignClient;

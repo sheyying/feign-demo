@@ -1,11 +1,13 @@
 package com.common.codec;
 
+import com.alibaba.fastjson.JSON;
+import com.fasterxml.jackson.databind.*;
 import feign.FeignException;
 import feign.Response;
-import feign.codec.DecodeException;
+import feign.Util;
 import feign.codec.Decoder;
 
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.Type;
 
 /**
@@ -13,8 +15,36 @@ import java.lang.reflect.Type;
  * fastJson解码器
  */
 public class FastJsonDecoder implements Decoder{
-    @Override
-    public Object decode(Response response, Type type) throws IOException, DecodeException, FeignException {
-        return null;
+    public Object decode(Response response, Type type) throws IOException, FeignException {
+        if(response.status() == 404) {
+            return Util.emptyValueOf(type);
+        } else if(response.body() == null) {
+            return null;
+        } else if(String.class.equals(type)) {
+            return Util.toString(response.body().asReader());
+        } else {
+            InputStream inputStream = response.body().asInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            try {
+                String lines =reader.readLine();
+                reader.close();
+                Object obj =JSON.parseObject(lines, type);
+                return obj;
+            } catch (RuntimeJsonMappingException var5) {
+                if(var5.getCause() != null && var5.getCause() instanceof IOException) {
+                    throw (IOException)IOException.class.cast(var5.getCause());
+                } else {
+                    throw var5;
+                }
+            }catch (Exception e){
+                System.out.print(e);
+                return null;
+            }finally {
+                if (null != reader){
+                    reader.close();
+                }
+            }
+        }
     }
+
 }

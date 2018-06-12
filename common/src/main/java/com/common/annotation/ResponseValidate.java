@@ -1,5 +1,7 @@
 package com.common.annotation;
 
+import com.common.response.FeignResponse;
+
 import java.lang.annotation.*;
 
 /**
@@ -13,10 +15,10 @@ import java.lang.annotation.*;
 public @interface ResponseValidate {
 
     /**
-     * response的实现类
+     * FeignResponse的实现类
      *
      * @return
      */
-    Class<?> value();
+    Class<? extends FeignResponse> value();
 
 }

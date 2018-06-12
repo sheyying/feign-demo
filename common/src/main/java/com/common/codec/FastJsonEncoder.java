@@ -1,7 +1,7 @@
 package com.common.codec;
 
+import com.alibaba.fastjson.JSON;
 import feign.RequestTemplate;
-import feign.codec.EncodeException;
 import feign.codec.Encoder;
 
 import java.lang.reflect.Type;
@@ -11,8 +11,8 @@ import java.lang.reflect.Type;
  * fastJson编码器
  */
 public class FastJsonEncoder implements Encoder{
-    @Override
-    public void encode(Object o, Type type, RequestTemplate requestTemplate) throws EncodeException {
 
+    public void encode(Object object, Type bodyType, RequestTemplate template) {
+        template.body(JSON.toJSONString(object));
     }
 }
