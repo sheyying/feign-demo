@@ -21,6 +21,6 @@ public interface FeignResponse<T, ErrT> {
     ErrT errT();
 
     // 响应状态
-    Boolean responseSuccess();
+    boolean responseSuccess();
 
 }

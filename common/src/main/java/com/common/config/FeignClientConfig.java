@@ -24,7 +24,7 @@ import java.security.cert.X509Certificate;
 @Configuration
 public class FeignClientConfig {
 
-    @Bean
+   /* @Bean
     @ConditionalOnMissingBean
     public Decoder feignDecoder() {
         return new FastJsonDecoder();
@@ -35,7 +35,7 @@ public class FeignClientConfig {
     public Encoder feignEncoder() {
         return new FastJsonEncoder();
     }
-
+*/
     @Bean
     @ConditionalOnMissingBean
     public Client feignClient(CachingSpringLoadBalancerFactory cachingFactory,

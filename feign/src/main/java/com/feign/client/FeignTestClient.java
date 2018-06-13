@@ -26,6 +26,7 @@ public interface FeignTestClient {
     UserResponse<User, Void> getUserWithHeader(@RequestHeader("Accept-Encoding") String encoding,
                                                @RequestHeader("Accept") String accept);
 
+    @ResponseValidate(value = UserResponse.class)
     @RequestMapping(method = RequestMethod.POST, value = "/getAdmin")
     UserResponse<User, Void> getAdmin(List<User> userList);
 

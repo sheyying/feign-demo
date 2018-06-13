@@ -18,9 +18,11 @@ public class FastJsonEncoder implements Encoder{
 
     public void encode(Object object, Type bodyType, RequestTemplate template) {
         Map<String, Collection<String>> headers = template.headers();
+        System.out.println(headers.isEmpty());
         Collection<String> contentTypes = (Collection)headers.get(HEADER_CONTENT_TYPE);
 
-        if (null == contentTypes || contentTypes.isEmpty()){    // 没有设置Content-Type，默认application/json;charset=UTF-8
+        // 没有设置Content-Type，默认application/json;charset=UTF-8
+        if (null == contentTypes || contentTypes.isEmpty()){
             contentTypes = new ArrayList<String>();
             contentTypes.add(MediaType.APPLICATION_JSON_UTF8_VALUE);
             headers.put(HEADER_CONTENT_TYPE, contentTypes);

@@ -59,7 +59,7 @@ public class UserResponse<T, ErrT> implements FeignResponse {
     }
 
     @Override
-    public Boolean responseSuccess() {
+    public boolean responseSuccess() {
         return this.returnCode.equals(RETURN_SUCCESS);
     }
 

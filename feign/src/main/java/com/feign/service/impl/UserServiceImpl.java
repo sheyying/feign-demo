@@ -1,5 +1,6 @@
 package com.feign.service.impl;
 
+import com.common.annotation.ResponseValidate;
 import com.common.entity.User;
 import com.feign.client.FeignTestClient;
 import com.feign.response.UserResponse;
@@ -80,6 +81,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    @ResponseValidate(value = UserResponse.class)
     public UserResponse<User, Void> getUserWithHeader(String encoding, String accept) {
         System.out.println(" =======> 开始 getUserWithHeader: " + encoding + "; ||| accept:" + accept);
 

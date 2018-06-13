@@ -1,5 +1,6 @@
 package com.feign.controller;
 
+import com.common.annotation.ResponseValidate;
 import com.common.entity.User;
 import com.feign.response.UserResponse;
 import com.feign.service.UserService;
@@ -33,6 +34,7 @@ public class UserController {
     }
 
     @ResponseBody
+    @ResponseValidate(value = UserResponse.class)
     @RequestMapping(value = "/getUser", method={RequestMethod.POST})
     public UserResponse<User, Void> getUser(long id){
         UserResponse<User, Void> result = userService.getUser(id);
