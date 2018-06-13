@@ -55,6 +55,7 @@ public class UserController {
         return response;
     }
 
+    @ResponseBody
     @RequestMapping(value = "/getAdmin", method={RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT})
     public UserResponse<User, Void> getAdmin(@RequestBody List<User> userList) throws InterruptedException{
         UserResponse response = new UserResponse();
@@ -76,10 +77,10 @@ public class UserController {
         }
         response.setReturnCode("000001");
         response.setReturnMsg("faild");
-
         return response;
     }
 
+    @ResponseBody
     @RequestMapping(value = "/getUserWithHeader", method={RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT})
     public UserResponse<User, Void> getUserWithHeader(@RequestHeader("Accept-Encoding") String encoding,
                                                       @RequestHeader("Accept") String accept)  {
@@ -107,6 +108,7 @@ public class UserController {
         return response;
     }
 
+    @ResponseBody
     @RequestMapping(value = "/insertUser", method={RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT})
     public void insertUser(@RequestBody User user) throws InterruptedException{
         System.out.println(" =======> 开始 insertUser() user = " + user);
@@ -117,6 +119,7 @@ public class UserController {
         System.out.println(" =======> 完成 insertUser()，耗时：" + (end - start) + "毫秒 " + user);
     }
 
+    @ResponseBody
     @RequestMapping(value = "/updateUser", method={RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT})
     public String updateUser(@RequestParam("id") Long id) throws InterruptedException{
         System.out.println(" =======> 开始 updateUser() id = " + id);
