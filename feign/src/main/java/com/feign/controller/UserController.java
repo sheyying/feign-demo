@@ -1,14 +1,11 @@
 package com.feign.controller;
 
-import com.common.annotation.ResponseValidate;
 import com.common.entity.User;
-import com.feign.response.UserResponse;
 import com.feign.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by sheying on 2018/05/31.
@@ -28,31 +25,30 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping(value = "/getName", method={RequestMethod.GET})
-    public UserResponse<String, Void> getName(@RequestParam("name") String name) {
-        UserResponse<String, Void> result = userService.getName(name);
+    public String getName(@RequestParam("name") String name) {
+        String result = userService.getName(name);
         return result;
     }
 
     @ResponseBody
-    @ResponseValidate(value = UserResponse.class)
     @RequestMapping(value = "/getUser", method={RequestMethod.POST})
-    public UserResponse<User, Void> getUser(long id){
-        UserResponse<User, Void> result = userService.getUser(id);
+    public User getUser(long id){
+        User result = userService.getUser(id);
         return result;
     }
 
     @ResponseBody
     @RequestMapping(value = "/getAdmin", method={RequestMethod.POST})
-    public UserResponse<User, Void> getAdmin(@RequestBody List<User> userList){
-        UserResponse<User, Void> result = userService.getAdmin(userList);
+    public User getAdmin(@RequestBody List<User> userList){
+        User result = userService.getAdmin(userList);
         return result;
     }
 
     @ResponseBody
     @RequestMapping(value = "/getUserWithHeader", method={RequestMethod.GET})
-    public UserResponse<User, Void> getUserWithHeader(@RequestHeader("Accept-Encoding") String encoding,
+    public User getUserWithHeader(@RequestHeader("Accept-Encoding") String encoding,
                                                       @RequestHeader("Accept") String accept){
-        UserResponse<User, Void> result = userService.getUserWithHeader(encoding, accept);
+        User result = userService.getUserWithHeader(encoding, accept);
         return result;
     }
 

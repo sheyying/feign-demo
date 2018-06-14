@@ -10,15 +10,16 @@ import java.util.List;
 
 /**
  * Created by sheying on 2018/05/31.
- * 当调用失败时返回HystrixClientFallback里面的实现内容
  */
-@FeignClient(name = "feignClient1", url = "${serviceUrl}", path = "/api/user")
+@FeignClient(name = "feignClient1", url = "${serviceUrl}", path = "/api/user",
+        fallback = HystrixClientFallback.class)
 public interface FeignTestClient {
 
     @ResponseValidate(value = UserResponse.class)
     @RequestMapping(method = RequestMethod.GET, value = "/getName")
     UserResponse<String, Void> getName(@RequestParam("name") String name);
 
+    @ResponseValidate(value = UserResponse.class)
     @RequestMapping(method = RequestMethod.GET, value = "/getUser/{id}")
     UserResponse<User, Void> getUser(@PathVariable("id") long id);
 
@@ -26,7 +27,6 @@ public interface FeignTestClient {
     UserResponse<User, Void> getUserWithHeader(@RequestHeader("Accept-Encoding") String encoding,
                                                @RequestHeader("Accept") String accept);
 
-    @ResponseValidate(value = UserResponse.class)
     @RequestMapping(method = RequestMethod.POST, value = "/getAdmin")
     UserResponse<User, Void> getAdmin(List<User> userList);
 

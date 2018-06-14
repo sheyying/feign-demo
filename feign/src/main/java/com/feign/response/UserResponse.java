@@ -1,65 +1,54 @@
 package com.feign.response;
 
 import com.common.response.FeignResponse;
+import com.common.response.SoaResponse;
 import lombok.Data;
-
-import java.util.UUID;
 
 /**
  * Created by sheying on 2018/06/06.
  */
 @Data
-public class UserResponse<T, ErrT> implements FeignResponse {
+public class UserResponse<T, ErrT> extends SoaResponse<T, ErrT> implements FeignResponse {
 
     private static final String RETURN_SUCCESS = "000000";
-    private static final long serialVersionUID = 889695893318362669L;
-    private String returnCode = "000000";
-    private String returnMsg;
-    private String logBizData;
-    private Boolean processResult = Boolean.valueOf(true);
-    private T responseVo;
-    private ErrT errT;
-    private String monitorTrackId = UUID.randomUUID().toString();
-    private String timestamp = System.currentTimeMillis() + "";
-    private String globalTicket;
 
     @Override
     public String monitorTrackId() {
-        return this.monitorTrackId;
+        return super.getMonitorTrackId();
     }
 
     @Override
     public String globalTicket() {
-        return this.globalTicket;
+        return super.getGlobalTicket();
     }
 
     @Override
     public String logBizData() {
-        return this.logBizData;
+        return super.getLogBizData();
     }
 
     @Override
     public String returnCode() {
-        return this.returnCode;
+        return super.getReturnCode();
     }
 
     @Override
     public String returnMsg() {
-        return this.returnMsg;
+        return super.getReturnMsg();
     }
 
     @Override
-    public Object responseVo() {
-        return this.responseVo;
+    public T responseVo() {
+        return super.getResponseVo();
     }
 
     @Override
-    public Object errT() {
-        return this.errT;
+    public ErrT errT() {
+        return null;
     }
 
     @Override
     public boolean responseSuccess() {
-        return this.returnCode.equals(RETURN_SUCCESS);
+        return super.getReturnCode().equals(RETURN_SUCCESS);
     }
 }

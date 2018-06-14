@@ -1,17 +1,13 @@
 package service.controller;
 
 import com.common.entity.User;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.AsyncResult;
-import service.response.UserResponse;
+import com.common.response.SoaResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 
 /**
  * Created by sheying on 2018/06/05.
@@ -24,8 +20,8 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping(value="/getName",method={RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT})
-    public UserResponse<String, Void> getName(@RequestParam("name") String name) throws InterruptedException{
-        UserResponse response = new UserResponse();
+    public SoaResponse<String, Void> getName(@RequestParam("name") String name) throws InterruptedException{
+        SoaResponse response = new SoaResponse();
         response.setReturnCode("000000");
         response.setReturnMsg("success");
         response.setResponseVo(name.toUpperCase());
@@ -35,8 +31,8 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping(value="/getUser/{id}",method={RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT})
-    public UserResponse<User, Void> getUser(@PathVariable("id") long id) throws InterruptedException{
-        UserResponse response = new UserResponse();
+    public SoaResponse<User, Void> getUser(@PathVariable("id") long id) throws InterruptedException{
+        SoaResponse response = new SoaResponse();
         User user = new User();
         user.setId(id);
         user.setName("默认名称");
@@ -57,11 +53,13 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping(value = "/getAdmin", method={RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT})
-    public UserResponse<User, Void> getAdmin(@RequestBody List<User> userList) throws InterruptedException{
-        UserResponse response = new UserResponse();
+    public SoaResponse<User, Void> getAdmin(@RequestBody List<User> userList) throws InterruptedException{
+        System.out.println("进入service方法 getAdmin(), userList = " + userList);
+        SoaResponse response = new SoaResponse();
         if (userList == null || userList.size() == 0){
             response.setReturnCode("000001");
             response.setReturnMsg("faild");
+            System.out.println("完成service方法 getAdmin(), response = " + response);
             return response;
         }
         for (User user : userList){
@@ -72,20 +70,22 @@ public class UserController {
                 response.setReturnCode("000000");
                 response.setReturnMsg("success");
                 response.setResponseVo(user);
+                System.out.println("完成service方法 getAdmin(), response = " + response);
                 return response;
             }
         }
         response.setReturnCode("000001");
         response.setReturnMsg("faild");
+        System.out.println("完成service方法 getAdmin(), response = " + response);
         return response;
     }
 
     @ResponseBody
     @RequestMapping(value = "/getUserWithHeader", method={RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT})
-    public UserResponse<User, Void> getUserWithHeader(@RequestHeader("Accept-Encoding") String encoding,
-                                                      @RequestHeader("Accept") String accept)  {
+    public SoaResponse<User, Void> getUserWithHeader(@RequestHeader("Accept-Encoding") String encoding,
+                                                     @RequestHeader("Accept") String accept)  {
         System.out.println(" ===== getUserWithHeader ====== " + encoding + " ===== " + accept);
-        UserResponse response = new UserResponse();
+        SoaResponse response = new SoaResponse();
         User user = new User();
         if (null != user.getName()){
             user.setName(user.getName().toUpperCase());

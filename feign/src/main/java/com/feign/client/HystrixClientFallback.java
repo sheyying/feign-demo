@@ -4,10 +4,7 @@ import com.common.entity.User;
 import com.feign.response.UserResponse;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.Future;
 
 /**
  * Created by sheying on 2018/06/05.
@@ -35,11 +32,8 @@ public class HystrixClientFallback implements FeignTestClient{
 
     @Override
     public UserResponse<User, Void> getAdmin(List<User> userList) {
-        UserResponse response = new UserResponse();
-        response.setReturnCode("110");
-        response.setReturnMsg("faild");
-        response.setResponseVo(null);
-        return response;
+        System.out.println("getAdmin2() error");
+        return null;
     }
 
     @Override
