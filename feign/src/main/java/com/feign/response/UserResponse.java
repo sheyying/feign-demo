@@ -1,5 +1,6 @@
 package com.feign.response;
 
+import com.common.entity.User;
 import com.common.response.FeignResponse;
 import com.common.response.SoaResponse;
 import lombok.Data;

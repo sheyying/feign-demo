@@ -52,10 +52,4 @@ public class UserController {
         return result;
     }
 
-    @ResponseBody
-    @RequestMapping(value = "/testAsync", method={RequestMethod.POST})
-    public String testAsync(@RequestBody List<User> userList){
-        return userService.testAsync(userList);
-    }
-
 }

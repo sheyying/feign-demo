@@ -11,8 +11,7 @@ import java.util.List;
 /**
  * Created by sheying on 2018/05/31.
  */
-@FeignClient(name = "feignClient1", url = "${serviceUrl}", path = "/api/user",
-        fallback = HystrixClientFallback.class)
+@FeignClient(name = "feignClient1", url = "${serviceUrl}", path = "/api/user")
 public interface FeignTestClient {
 
     @ResponseValidate(value = UserResponse.class)

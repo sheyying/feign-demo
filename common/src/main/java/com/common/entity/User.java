@@ -11,6 +11,8 @@ import java.util.Map;
 @Data
 public class User implements Serializable{
 
+    private static final long serialVersionUID = 889695893318376669L;
+
     private long id;
 
     private String name;
@@ -20,5 +22,4 @@ public class User implements Serializable{
     private String sex;
 
     private Map<String, Object> headerInfo;
-
 }

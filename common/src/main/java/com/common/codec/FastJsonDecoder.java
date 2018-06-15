@@ -28,18 +28,11 @@ public class FastJsonDecoder implements Decoder{
             try {
                 String lines =reader.readLine();
                 reader.close();
-                Object obj =JSON.parseObject(lines, type);
+                Object obj = JSON.parseObject(lines, type);
                 return obj;
-            } catch (RuntimeJsonMappingException var5) {
-                if(var5.getCause() != null && var5.getCause() instanceof IOException) {
-                    throw (IOException)IOException.class.cast(var5.getCause());
-                } else {
-                    throw var5;
-                }
-            }catch (Exception e){
-                System.out.print(e);
-                return null;
-            }finally {
+            } catch (Exception e){
+                throw e;
+            } finally {
                 if (null != reader){
                     reader.close();
                 }
