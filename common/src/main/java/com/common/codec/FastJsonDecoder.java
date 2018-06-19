@@ -1,7 +1,6 @@
 package com.common.codec;
 
 import com.alibaba.fastjson.JSON;
-import com.fasterxml.jackson.databind.*;
 import feign.FeignException;
 import feign.Response;
 import feign.Util;

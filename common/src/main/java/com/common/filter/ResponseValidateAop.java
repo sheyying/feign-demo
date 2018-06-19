@@ -1,4 +1,4 @@
-package com.feign.filter;
+package com.common.filter;
 
 import com.common.annotation.ResponseValidate;
 import com.common.exception.BizException;
@@ -17,11 +17,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class ResponseValidateAop {
 
-    @Pointcut("execution(* com.feign..*.*(..))")
+    @Pointcut("execution(* *..client..*(..))")
     public void testPointcut(){}
 
     /**
      * 拦截规则：拦截所有@ResponseValidate注解的方法或类
+     * 拦截不了接口上的注解，故废弃
      */
     @Pointcut("@within(com.common.annotation.ResponseValidate) " +
             "|| @annotation(com.common.annotation.ResponseValidate)")
@@ -29,7 +30,7 @@ public class ResponseValidateAop {
 
     @AfterReturning(value = "testPointcut()", returning = "result")
     public void responseValidate(JoinPoint point, FeignResponse result) throws Throwable{
-        System.out.println("===== responseValidate 拦截到了" + point + " 方法... result: " + result);
+        System.out.println("===== common responseValidate 拦截到了" + point + " 方法... result: " + result);
 
         MethodSignature methodSignature = ((MethodSignature)point.getSignature());
         boolean methodAnno = methodSignature.getMethod().isAnnotationPresent(ResponseValidate.class);

@@ -12,13 +12,12 @@ import java.util.List;
  * Created by sheying on 2018/05/31.
  */
 @FeignClient(name = "feignClient1", url = "${serviceUrl}", path = "/api/user")
+@ResponseValidate()
 public interface FeignTestClient {
 
-    @ResponseValidate(value = UserResponse.class)
     @RequestMapping(method = RequestMethod.GET, value = "/getName")
     UserResponse<String, Void> getName(@RequestParam("name") String name);
 
-    @ResponseValidate(value = UserResponse.class)
     @RequestMapping(method = RequestMethod.GET, value = "/getUser/{id}")
     UserResponse<User, Void> getUser(@PathVariable("id") long id);
 
