@@ -29,7 +29,7 @@ public class UserController {
         return response;
     }
 
-    @ResponseBody
+    /*@ResponseBody
     @RequestMapping(value="/getUser/{id}",method={RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT})
     public SoaResponse<User, Void> getUser(@PathVariable("id") long id) throws InterruptedException{
         SoaResponse response = new SoaResponse();
@@ -49,6 +49,21 @@ public class UserController {
         }
 
         return response;
+    }*/
+
+    @ResponseBody
+    @RequestMapping(value="/getUser/{id}",method={RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT})
+    public User getUser(@PathVariable("id") long id) throws InterruptedException{
+        if (id > 10000){
+            return null;
+        }
+
+        User user = new User();
+        user.setId(id);
+        user.setName("默认名称");
+        user.setSex("未知");
+
+        return user;
     }
 
     @ResponseBody
@@ -81,17 +96,6 @@ public class UserController {
     }
 
     @ResponseBody
-    @RequestMapping(value="/getAge",method={RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT})
-    public SoaResponse<Integer, Void> getAge(@RequestParam("id") Long id) throws InterruptedException{
-        SoaResponse response = new SoaResponse();
-        response.setReturnCode("000000");
-        response.setReturnMsg("success");
-        response.setResponseVo(20);
-
-        return response;
-    }
-
-    @ResponseBody
     @RequestMapping(value = "/getUserWithHeader", method={RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT})
     public SoaResponse<User, Void> getUserWithHeader(@RequestHeader("Accept-Encoding") String encoding,
                                                      @RequestHeader("Accept") String accept)  {
@@ -117,6 +121,13 @@ public class UserController {
         response.setResponseVo(user);
 
         return response;
+    }
+
+    @ResponseBody
+    @RequestMapping(value="/getAge",method={RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT})
+    public Integer getAge(@RequestParam("id") Long id) throws InterruptedException{
+
+        return 20;
     }
 
     @ResponseBody

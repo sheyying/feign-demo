@@ -9,6 +9,7 @@ import feign.FeignException;
 import feign.Response;
 import feign.Util;
 import feign.codec.Decoder;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
 import java.lang.reflect.Type;
@@ -17,9 +18,12 @@ import java.lang.reflect.Type;
  * Created by sheying on 2018/06/07.
  * fastJson解码器
  */
+@Slf4j
 public class FastJsonDecoder implements Decoder{
     @Override
     public Object decode(Response response, Type type) throws IOException, FeignException {
+        Thread th = Thread.currentThread();
+        log.info("decode 当前线程: {}", JSONObject.toJSONString(th.getId()));
         ResponseMsg responseMsg = ThreadLocalMessage.getInstance().getMessage();
         if(response.status() == 404) {
             return Util.emptyValueOf(type);
@@ -35,6 +39,7 @@ public class FastJsonDecoder implements Decoder{
                 responseMsg.setReturnMsg(lines);
                 ThreadLocalMessage.getInstance().setMessage(responseMsg);
                 reader.close();
+
                 Object obj;
                 if (responseMsg.isHasAnno()){// 需要校验，则只返回responseVo
                     JSONObject jsonObject = JSON.parseObject(lines);

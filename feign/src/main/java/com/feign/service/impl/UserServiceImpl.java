@@ -1,12 +1,14 @@
 package com.feign.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.common.entity.User;
-import com.common.exception.BizException;
 import com.feign.client.FeignTestClient;
 import com.feign.response.UserResponse;
 import com.feign.service.UserAsyncService;
 import com.feign.service.UserService;
+import com.weimob.cube.exception.BizException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +18,7 @@ import java.util.List;
  * Created by sheying on 2018/06/05.
  */
 @Component
+@Slf4j
 public class UserServiceImpl implements UserService{
 
     @Autowired
@@ -26,6 +29,8 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public String getName(String name){
+        Thread th = Thread.currentThread();
+        log.info("getName 当前线程: {}", JSONObject.toJSONString(th.getId()));
         try {
             return feignTestClient.getName(name);
         } catch (BizException e){
@@ -36,6 +41,8 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User getUser(long id){
+        Thread th = Thread.currentThread();
+        log.info("getUser 当前线程: {}", JSONObject.toJSONString(th.getId()));
         try {
             return feignTestClient.getUser(id);
         } catch (BizException e){
@@ -46,6 +53,8 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User getAdmin(List<User> userList){
+        Thread th = Thread.currentThread();
+        log.info("getAdmin 当前线程: {}", JSONObject.toJSONString(th.getId()));
         try {
             return feignTestClient.getAdmin(userList);
         } catch (BizException e){
@@ -56,6 +65,8 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public Integer getAge(Long id) {
+        Thread th = Thread.currentThread();
+        log.info("getAge 当前线程: {}", JSONObject.toJSONString(th.getId()));
         try {
             return feignTestClient.getAge(id);
         } catch (BizException e){
@@ -82,11 +93,12 @@ public class UserServiceImpl implements UserService{
         userAsyncService.insertUser(userList.get(1));
         userAsyncService.insertUser(userList.get(2));
         userAsyncService.insertUser(userList.get(3));
-        while (true) {  ///这里使用了循环判断，等待获取结果信息
+//        while (true) {  ///这里使用了循环判断，等待获取结果信息
             if (null != result) {  //判断是否执行完毕
                 System.out.println("Result from feignTestClient.updateUser - " + result);
                 return result;
             }
-        }
+//        }
+        return null;
     }
 }

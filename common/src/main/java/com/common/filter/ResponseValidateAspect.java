@@ -1,11 +1,12 @@
 package com.common.filter;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.common.annotation.ResponseValidate;
 import com.common.entity.ResponseMsg;
-import com.common.exception.BizException;
 import com.common.response.FeignResponse;
 import com.common.thread.ThreadLocalMessage;
+import com.weimob.cube.exception.BizException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.aspectj.lang.JoinPoint;
@@ -21,7 +22,11 @@ import java.lang.reflect.Method;
 public class ResponseValidateAspect {
 
     public Object around(ProceedingJoinPoint point) throws Throwable{
-        log.info(String.format("around 拦截到了%s方法...", point));
+
+        log.info("around 拦截到了{}方法...", point);
+
+        Thread th = Thread.currentThread();
+        log.info("around 当前线程: {}", JSONObject.toJSONString(th.getId()));
 
         try {
             ResponseValidate responseValidate = this.findResponseValidate(point);
@@ -33,13 +38,13 @@ public class ResponseValidateAspect {
                 Object object = point.proceed();    //运行doSth()，返回值用一个Object类型来接收
                 Class valClazz = responseValidate.value();
                 responseMsg = ThreadLocalMessage.getInstance().getMessage();
+
                 if (StringUtils.isBlank(responseMsg.getReturnMsg())) {
                     return object;
                 }
                 Object obj = JSON.parseObject(responseMsg.getReturnMsg(), responseValidate.value());
                 if (valClazz.isInstance(obj)) {
                     FeignResponse resp = (FeignResponse) valClazz.cast(obj);
-//                FeignResponse resp = (FeignResponse)object;
                     if (null == resp) {
                         log.info("ResponseValidateAspect 拦截器 result is null");
                         throw new BizException("", "result is null");
@@ -47,7 +52,7 @@ public class ResponseValidateAspect {
                         log.info("ResponseValidateAspect 拦截器 result error");
                         throw new BizException(resp.returnCode(), resp.returnMsg(), object);
                     } else {
-                        log.info("ResponseValidateAspect return " + resp.responseVo());
+                        log.info("ResponseValidateAspect return {}", resp.responseVo());
                         return object;
                     }
                 }
@@ -73,29 +78,5 @@ public class ResponseValidateAspect {
         }
         return null;
     }
-
-   /* public void responseValidate(JoinPoint point, Object result) throws Throwable{
-        log.info(String.format("responseValidate 拦截到了%s方法，result: %s", point, result));
-
-        ResponseValidate responseValidate = this.findResponseValidate(point);
-        Class valClazz = responseValidate.value();
-        if (valClazz.isInstance(result)){
-            valClazz.cast(result);
-        }
-        FeignResponse resp = (FeignResponse)result;
-        if (null != responseValidate) {
-            log.info("该方法加了ResponseValidate注解...");
-            if (null == result) {
-                System.out.println("拦截器 result is null");
-                throw new BizException("", "result is null");
-            } else if (!resp.responseSuccess()) {
-                System.out.println("拦截器 result error");
-                throw new BizException(resp.returnCode(), resp.returnMsg(), resp.responseVo());
-            } else {
-                result = resp.responseVo();
-            }
-        }
-        log.info("ResponseValidateAspect responseValidate result: " + result);
-    }*/
 
 }

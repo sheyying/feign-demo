@@ -9,6 +9,8 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.cloud.netflix.feign.ribbon.CachingSpringLoadBalancerFactory;
 import org.springframework.cloud.netflix.feign.ribbon.LoadBalancerFeignClient;
 import org.springframework.cloud.netflix.ribbon.SpringClientFactory;
+//import org.springframework.cloud.openfeign.ribbon.CachingSpringLoadBalancerFactory;
+//import org.springframework.cloud.openfeign.ribbon.LoadBalancerFeignClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

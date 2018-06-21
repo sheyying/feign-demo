@@ -3,6 +3,7 @@ package com.common.annotation;
 import com.common.config.FeignClientConfig;
 import com.common.config.ResponseVallidateRegistrar;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
+//import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.annotation.AliasFor;

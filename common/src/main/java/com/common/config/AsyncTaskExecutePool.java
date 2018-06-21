@@ -13,7 +13,7 @@ import java.util.concurrent.Executor;
  * 描述：配置异步任务的线程池
  * Created by sheying on 2018/06/11.
  */
-@Configuration
+//@Configuration
 public class AsyncTaskExecutePool implements AsyncConfigurer {
 
     @Override

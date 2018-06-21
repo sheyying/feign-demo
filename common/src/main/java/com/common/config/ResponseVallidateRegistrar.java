@@ -51,7 +51,7 @@ public class ResponseVallidateRegistrar implements ImportBeanDefinitionRegistrar
 
         final List<String> interfaceNames = new ArrayList<>();
 
-        // 扫描@Mapper的dao接口
+        // 扫描@ResponseValidate的接口
         scanner.addIncludeFilter(new TypeFilter(){
             @Override
             public boolean match(MetadataReader metadataReader, MetadataReaderFactory metadataReaderFactory) throws IOException {
@@ -60,7 +60,7 @@ public class ResponseVallidateRegistrar implements ImportBeanDefinitionRegistrar
                     Class<?> clazz = Thread.currentThread().getContextClassLoader().loadClass(metadata.getClassName());
                     if(clazz.isInterface() && clazz.isAnnotationPresent(ResponseValidate.class)){
                         interfaceNames.add(clazz.getName());
-                    }else {
+                    }else if (clazz.isInterface() && !clazz.isAnnotationPresent(ResponseValidate.class)){
                         for (Method method : clazz.getMethods()) {
                             // 方法中有注解
                             if (method.isAnnotationPresent(ResponseValidate.class)) {

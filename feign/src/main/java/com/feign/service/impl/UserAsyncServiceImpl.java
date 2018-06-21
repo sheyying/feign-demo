@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
-@Async
+//@Async
 public class UserAsyncServiceImpl implements UserAsyncService{
 
     @Autowired

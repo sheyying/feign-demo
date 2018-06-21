@@ -3,6 +3,7 @@ package com.feign.client;
 import com.common.annotation.ResponseValidate;
 import com.common.entity.User;
 import com.feign.response.UserResponse;
+//import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
