@@ -81,6 +81,17 @@ public class UserController {
     }
 
     @ResponseBody
+    @RequestMapping(value="/getAge",method={RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT})
+    public SoaResponse<Integer, Void> getAge(@RequestParam("id") Long id) throws InterruptedException{
+        SoaResponse response = new SoaResponse();
+        response.setReturnCode("000000");
+        response.setReturnMsg("success");
+        response.setResponseVo(20);
+
+        return response;
+    }
+
+    @ResponseBody
     @RequestMapping(value = "/getUserWithHeader", method={RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT})
     public SoaResponse<User, Void> getUserWithHeader(@RequestHeader("Accept-Encoding") String encoding,
                                                      @RequestHeader("Accept") String accept)  {

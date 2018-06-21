@@ -12,21 +12,27 @@ import java.util.List;
  * Created by sheying on 2018/05/31.
  */
 @FeignClient(name = "feignClient1", url = "${serviceUrl}", path = "/api/user")
-@ResponseValidate()
 public interface FeignTestClient {
 
     @RequestMapping(method = RequestMethod.GET, value = "/getName")
-    UserResponse<String, Void> getName(@RequestParam("name") String name);
+    @ResponseValidate(value = UserResponse.class)
+    String getName(@RequestParam("name") String name);
 
     @RequestMapping(method = RequestMethod.GET, value = "/getUser/{id}")
-    UserResponse<User, Void> getUser(@PathVariable("id") long id);
+    @ResponseValidate(value = UserResponse.class)
+    User getUser(@PathVariable("id") long id);
+
+    @RequestMapping(method = RequestMethod.GET, value = "/getAge")
+    @ResponseValidate(value = UserResponse.class)
+    Integer getAge(@RequestParam("id") Long id);
 
     @RequestMapping(method = RequestMethod.POST, value = "/getUserWithHeader")
     UserResponse<User, Void> getUserWithHeader(@RequestHeader("Accept-Encoding") String encoding,
                                                @RequestHeader("Accept") String accept);
 
     @RequestMapping(method = RequestMethod.POST, value = "/getAdmin")
-    UserResponse<User, Void> getAdmin(List<User> userList);
+    @ResponseValidate(value = UserResponse.class)
+    User getAdmin(List<User> userList);
 
     @RequestMapping(method = RequestMethod.POST, value = "/insertUser")
     void insertUser(User user);

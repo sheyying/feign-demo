@@ -15,6 +15,8 @@ public interface UserService {
 
     User getAdmin(List<User> userList);
 
+    Integer getAge(Long id);
+
     User getUserWithHeader(String encoding, String accept);
 
     String testAsync(List<User> userList);

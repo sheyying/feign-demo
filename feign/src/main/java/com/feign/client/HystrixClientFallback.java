@@ -13,25 +13,32 @@ import java.util.List;
 public class HystrixClientFallback implements FeignTestClient{
 
     @Override
-    public UserResponse<String, Void> getName(String name) {
-        UserResponse response = new UserResponse();
+    public String getName(String name) {
+        /*UserResponse response = new UserResponse();
         response.setReturnCode("110");
         response.setReturnMsg("faild");
         response.setResponseVo("出错啦~~~");
-        return response;
+        return response;*/
+        return "出错啦~~~";
     }
 
     @Override
-    public UserResponse<User, Void> getUser(long id) {
-        UserResponse response = new UserResponse();
+    public User getUser(long id) {
+       /* UserResponse response = new UserResponse();
         response.setReturnCode("110");
         response.setReturnMsg("faild");
         response.setResponseVo(null);
-        return response;
+        return response;*/
+        return null;
     }
 
     @Override
-    public UserResponse<User, Void> getAdmin(List<User> userList) {
+    public Integer getAge(Long id) {
+        return 0;
+    }
+
+    @Override
+    public User getAdmin(List<User> userList) {
         System.out.println("getAdmin2() error");
         return null;
     }

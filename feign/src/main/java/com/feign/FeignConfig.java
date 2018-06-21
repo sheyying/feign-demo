@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  */
-@EnableO2OFeignConfig
+@EnableO2OFeignConfig(basePackages = "com.feign.client")
 @Configuration
 public class FeignConfig {
 

@@ -45,6 +45,12 @@ public class UserController {
     }
 
     @ResponseBody
+    @RequestMapping(value = "/getAge", method={RequestMethod.GET})
+    public Integer getAge(@RequestParam("id") Long id){
+        Integer result = userService.getAge(id);
+        return result;
+    }
+    @ResponseBody
     @RequestMapping(value = "/getUserWithHeader", method={RequestMethod.GET})
     public User getUserWithHeader(@RequestHeader("Accept-Encoding") String encoding,
                                                       @RequestHeader("Accept") String accept){

@@ -27,10 +27,9 @@ public class UserServiceImpl implements UserService{
     @Override
     public String getName(String name){
         try {
-            UserResponse<String, Void> response = feignTestClient.getName(name);
-            return response.responseVo();
+            return feignTestClient.getName(name);
         } catch (BizException e){
-            System.out.println("getAdmin2() error " + JSON.toJSONString(e));
+            System.out.println("getName() error " + JSON.toJSONString(e));
         }
         return null;
     }
@@ -38,10 +37,9 @@ public class UserServiceImpl implements UserService{
     @Override
     public User getUser(long id){
         try {
-            UserResponse<User, Void> response = feignTestClient.getUser(id);
-            return response.responseVo();
+            return feignTestClient.getUser(id);
         } catch (BizException e){
-            System.out.println("getAdmin2() error " + JSON.toJSONString(e));
+            System.out.println("getUser() error " + JSON.toJSONString(e));
         }
         return null;
     }
@@ -49,10 +47,19 @@ public class UserServiceImpl implements UserService{
     @Override
     public User getAdmin(List<User> userList){
         try {
-            UserResponse<User, Void> response = feignTestClient.getAdmin(userList);
-            return response.responseVo();
+            return feignTestClient.getAdmin(userList);
         } catch (BizException e){
-            System.out.println("getAdmin2() error " + JSON.toJSONString(e));
+            System.out.println("getAdmin() error " + JSON.toJSONString(e));
+        }
+        return null;
+    }
+
+    @Override
+    public Integer getAge(Long id) {
+        try {
+            return feignTestClient.getAge(id);
+        } catch (BizException e){
+            System.out.println("getAge() error " + JSON.toJSONString(e));
         }
         return null;
     }
@@ -63,7 +70,7 @@ public class UserServiceImpl implements UserService{
             UserResponse<User, Void> response = feignTestClient.getUserWithHeader(encoding, accept);
             return response.responseVo();
         } catch (BizException e){
-            System.out.println("getAdmin2() error " + JSON.toJSONString(e));
+            System.out.println("getUserWithHeader() error " + JSON.toJSONString(e));
         }
         return null;
     }
