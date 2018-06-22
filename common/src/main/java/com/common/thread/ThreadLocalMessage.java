@@ -9,7 +9,7 @@ public class ThreadLocalMessage {
     private  ThreadLocal<ResponseMsg> messages;
 
     private ThreadLocalMessage(){
-        messages = new ThreadLocal<ResponseMsg>();
+        messages = new InheritableThreadLocal<ResponseMsg>();
     }
 
     public ResponseMsg getMessage() {

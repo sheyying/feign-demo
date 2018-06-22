@@ -1,7 +1,6 @@
 package com.feign.service.impl;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.common.entity.User;
 import com.feign.client.FeignTestClient;
 import com.feign.response.UserResponse;
@@ -29,8 +28,6 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public String getName(String name){
-        Thread th = Thread.currentThread();
-        log.info("getName 当前线程: {}", JSONObject.toJSONString(th.getId()));
         try {
             return feignTestClient.getName(name);
         } catch (BizException e){
@@ -41,8 +38,6 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User getUser(long id){
-        Thread th = Thread.currentThread();
-        log.info("getUser 当前线程: {}", JSONObject.toJSONString(th.getId()));
         try {
             return feignTestClient.getUser(id);
         } catch (BizException e){
@@ -53,8 +48,6 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User getAdmin(List<User> userList){
-        Thread th = Thread.currentThread();
-        log.info("getAdmin 当前线程: {}", JSONObject.toJSONString(th.getId()));
         try {
             return feignTestClient.getAdmin(userList);
         } catch (BizException e){
@@ -65,8 +58,6 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public Integer getAge(Long id) {
-        Thread th = Thread.currentThread();
-        log.info("getAge 当前线程: {}", JSONObject.toJSONString(th.getId()));
         try {
             return feignTestClient.getAge(id);
         } catch (BizException e){

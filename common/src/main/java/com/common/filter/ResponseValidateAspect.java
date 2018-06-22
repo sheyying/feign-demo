@@ -1,7 +1,6 @@
 package com.common.filter;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.common.annotation.ResponseValidate;
 import com.common.entity.ResponseMsg;
 import com.common.response.FeignResponse;
@@ -22,11 +21,7 @@ import java.lang.reflect.Method;
 public class ResponseValidateAspect {
 
     public Object around(ProceedingJoinPoint point) throws Throwable{
-
         log.info("around 拦截到了{}方法...", point);
-
-        Thread th = Thread.currentThread();
-        log.info("around 当前线程: {}", JSONObject.toJSONString(th.getId()));
 
         try {
             ResponseValidate responseValidate = this.findResponseValidate(point);
@@ -62,7 +57,6 @@ public class ResponseValidateAspect {
         } finally {
             ThreadLocalMessage.getInstance().removeMessage();
         }
-        System.out.println("around 拦截 ending----");
         return point.proceed();
     }
 

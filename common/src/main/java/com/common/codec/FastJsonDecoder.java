@@ -22,8 +22,6 @@ import java.lang.reflect.Type;
 public class FastJsonDecoder implements Decoder{
     @Override
     public Object decode(Response response, Type type) throws IOException, FeignException {
-        Thread th = Thread.currentThread();
-        log.info("decode 当前线程: {}", JSONObject.toJSONString(th.getId()));
         ResponseMsg responseMsg = ThreadLocalMessage.getInstance().getMessage();
         if(response.status() == 404) {
             return Util.emptyValueOf(type);
