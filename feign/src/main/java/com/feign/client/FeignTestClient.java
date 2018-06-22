@@ -3,7 +3,6 @@ package com.feign.client;
 import com.common.annotation.ResponseValidate;
 import com.common.entity.User;
 import com.feign.response.UserResponse;
-//import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +11,7 @@ import java.util.List;
 /**
  * Created by sheying on 2018/05/31.
  */
-@FeignClient(name = "feignClient1", url = "${serviceUrl}", path = "/api/user")
+@FeignClient(name = "feignClient", url = "${serviceUrl}", path = "/api/user")
 public interface FeignTestClient {
 
     @RequestMapping(method = RequestMethod.GET, value = "/getName")

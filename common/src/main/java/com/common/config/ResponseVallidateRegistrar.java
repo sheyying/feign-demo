@@ -1,6 +1,6 @@
 package com.common.config;
 
-import com.common.annotation.EnableO2OFeignConfig;
+import com.common.annotation.EnableO2OFeignClients;
 import com.common.annotation.ResponseValidate;
 import lombok.Setter;
 import lombok.val;
@@ -39,7 +39,7 @@ public class ResponseVallidateRegistrar implements ImportBeanDefinitionRegistrar
             return;
         }
         AnnotationAttributes attributes = AnnotationAttributes.fromMap(metadata
-                .getAnnotationAttributes(EnableO2OFeignConfig.class.getName()));
+                .getAnnotationAttributes(EnableO2OFeignClients.class.getName()));
 
         String[] basePackages = attributes.getStringArray("basePackages");
         if(basePackages.length == 0) {

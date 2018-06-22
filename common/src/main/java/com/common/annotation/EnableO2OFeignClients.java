@@ -15,7 +15,7 @@ import org.springframework.core.annotation.AliasFor;
 @EnableFeignClients
 @Configuration
 @Import({FeignClientConfig.class, ResponseVallidateRegistrar.class})
-public @interface EnableO2OFeignConfig {
+public @interface EnableO2OFeignClients {
 
     @AliasFor(annotation = EnableFeignClients.class)
     String[] basePackages();
