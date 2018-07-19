@@ -55,7 +55,7 @@ public class UserController {
     @RequestMapping(value = "/getAdmin", method={RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT})
     public SoaResponse<User, Void> getAdmin(@RequestBody List<User> userList) throws InterruptedException{
         System.out.println("进入service方法 getAdmin(), userList = " + userList);
-        Thread.sleep(5000);
+//        Thread.sleep(5000);
         SoaResponse response = new SoaResponse();
         if (userList == null || userList.size() == 0){
             response.setReturnCode("000001");

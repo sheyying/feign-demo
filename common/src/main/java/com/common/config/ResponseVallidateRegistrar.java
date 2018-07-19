@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Aop拦截接口(ResponseValidate注解)
  * Created by sheying on 2018/06/20.
  */
 public class ResponseVallidateRegistrar implements ImportBeanDefinitionRegistrar, ResourceLoaderAware {

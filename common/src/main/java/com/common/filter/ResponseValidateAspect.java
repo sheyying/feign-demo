@@ -37,17 +37,16 @@ public class ResponseValidateAspect {
                 if (StringUtils.isBlank(responseMsg.getReturnMsg())) {
                     return object;
                 }
-                Object obj = JSON.parseObject(responseMsg.getReturnMsg(), responseValidate.value());
+                Object obj = JSON.parseObject(responseMsg.getReturnMsg(), valClazz);
                 if (valClazz.isInstance(obj)) {
                     FeignResponse resp = (FeignResponse) valClazz.cast(obj);
                     if (null == resp) {
                         log.info("ResponseValidateAspect 拦截器 result is null");
-                        throw new BizException("", "result is null");
+                        throw new BizException("1", "result is null");
                     } else if (!resp.responseSuccess()) {
                         log.info("ResponseValidateAspect 拦截器 result error");
                         throw new BizException(resp.returnCode(), resp.returnMsg(), object);
                     } else {
-                        log.info("ResponseValidateAspect return {}", resp.responseVo());
                         return object;
                     }
                 }

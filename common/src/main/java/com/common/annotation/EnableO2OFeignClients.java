@@ -1,5 +1,6 @@
 package com.common.annotation;
 
+import com.common.config.AsyncConfig;
 import com.common.config.FeignClientConfig;
 import com.common.config.ResponseVallidateRegistrar;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
@@ -14,7 +15,7 @@ import org.springframework.core.annotation.AliasFor;
 // 开启FeignClients注解
 @EnableFeignClients
 @Configuration
-@Import({FeignClientConfig.class, ResponseVallidateRegistrar.class})
+@Import({FeignClientConfig.class, ResponseVallidateRegistrar.class, AsyncConfig.class})
 public @interface EnableO2OFeignClients {
 
     @AliasFor(annotation = EnableFeignClients.class)

@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 /**
  * Created by sheying on 2018/06/05.
@@ -80,7 +82,28 @@ public class UserServiceImpl implements UserService{
     @Override
     public String testAsync(List<User> userList) {
         userAsyncService.insertUser(userList.get(0));
-        String result = userAsyncService.updateUser(22l);
+        Future<String> future = userAsyncService.asyncInvokeReturnFuture(100);
+        try {
+            System.out.println("----- " + future.get());
+//            return future.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        userAsyncService.insertUser(userList.get(1));
+        userAsyncService.insertUser(userList.get(2));
+        userAsyncService.insertUser(userList.get(3));
+        try {
+            System.out.println("====== " + future.get());
+            return future.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return ".....";
+    }/* String result = userAsyncService.updateUser(22l);
         userAsyncService.insertUser(userList.get(1));
         userAsyncService.insertUser(userList.get(2));
         userAsyncService.insertUser(userList.get(3));
@@ -90,6 +113,5 @@ public class UserServiceImpl implements UserService{
                 return result;
             }
 //        }
-        return null;
-    }
+        return null;*/
 }

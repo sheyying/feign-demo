@@ -58,9 +58,9 @@ public class FeignClientConfig {
     @Bean
     public Retryer feignRetryer(ConfigurableEnvironment env) {
         // 重试间隔默认100ms, 最大重试时间默认1000ms, 重试次数默认0次。
-        int period = env.getProperty("period", int.class, 100);
-        int maxPeriod = env.getProperty("maxPeriod", int.class, 1000);
-        int maxAttempts = env.getProperty("maxAttempts", int.class, 0);
+        int period = env.getProperty("feign.period", int.class, 100);
+        int maxPeriod = env.getProperty("feign.maxPeriod", int.class, 1000);
+        int maxAttempts = env.getProperty("feign.maxAttempts", int.class, 0);
 
         return new Retryer.Default(period, maxPeriod, maxAttempts);
     }
